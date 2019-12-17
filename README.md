@@ -8,7 +8,7 @@
 [cov]: https://codecov.io/github/aquasecurity/kube-bench
 <img src="images/kube-bench.png" width="200" alt="kube-bench logo">
 
-kube-bench is a Go application that checks whether Kubernetes is deployed securely by running the checks documented in the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/). 
+kube-bench is a Go application that checks whether Kubernetes is deployed securely by running the checks documented in the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/).
 
 Note that it is impossible to inspect the master nodes of managed clusters, e.g. GKE, EKS and AKS, using kube-bench as one does not have access to such nodes, although it is still possible to use kube-bench to check worker node configuration in these environments.
 
@@ -39,21 +39,21 @@ Table of Contents
     - [Bugs](#bugs)
     - [Features](#features)
     - [Pull Requests](#pull-requests)
-      
+
 ## CIS Kubernetes Benchmark support
 
-kube-bench supports the tests for Kubernetes as defined in the CIS Benchmarks 1.3.0 to 1.5.0 respectively. 
+kube-bench supports the tests for Kubernetes as defined in the CIS Benchmarks 1.3.0 to 1.5.0 respectively.
 
 | CIS Kubernetes Benchmark | kube-bench config | Kubernetes versions |
-|---|---|---|
-| 1.3.0| cis-1.3 | 1.11-1.12 |
-| 1.4.1| cis-1.4 | 1.13-1.14 |
+| --- | --- | --- |
+| 1.3.0 | cis-1.3 | 1.11-1.12 |
+| 1.4.1 | cis-1.4 | 1.13-1.14 |
 | 1.5.0 | cis-1.5 | 1.15- |
 
 
 By default, kube-bench will determine the test set to run based on the Kubernetes version running on the machine.
 
-There is also preliminary support for Red Hat's OpenShift Hardening Guide for 3.10 and 3.11. Please note that kube-bench does not automatically detect OpenShift - see below. 
+There is also preliminary support for Red Hat's OpenShift Hardening Guide for 3.10 and 3.11. Please note that kube-bench does not automatically detect OpenShift - see below.
 
 
 
@@ -72,7 +72,7 @@ If you run kube-bench directly from the command line you may need to be root / s
 kube-bench automatically selects which `controls` to use based on the detected
 node type and the version of Kubernetes a cluster is running. This behavior
 can be overridden by specifying the `master` or `node` subcommand and the
-`--version` flag on the command line. 
+`--version` flag on the command line.
 
 
 The Kubernetes version can also be set with the `KUBE_BENCH_VERSION` environment variable.
@@ -110,10 +110,10 @@ kube-bench --benchmark cis-1.5 run --targets master,node,etcd,policies
 
 The following table shows the valid targets based on the CIS Benchmark version.
 | CIS Benchmark | Targets |
-|---|---|
-| cis-1.3| master, node |
-| cis-1.4| master, node |
-| cis-1.5| master, controlplane, node, etcd, policies |
+| --- | --- |
+| cis-1.3 | master, node |
+| cis-1.4 | master, node |
+| cis-1.5 | master, controlplane, node, etcd, policies |
 
 If no targets are specified, `kube-bench` will determine the appropriate targets based on the CIS Benchmark version.
 
@@ -124,7 +124,7 @@ with same name as the CIS Benchmark versions under `cfg/`, for example `cfg/cis-
 
 ### Running inside a container
 
-You can avoid installing kube-bench on the host by running it inside a container using the host PID namespace and mounting the `/etc` and `/var` directories where the configuration and other files are located on the host so that kube-bench can check their existence and permissions. 
+You can avoid installing kube-bench on the host by running it inside a container using the host PID namespace and mounting the `/etc` and `/var` directories where the configuration and other files are located on the host so that kube-bench can check their existence and permissions.
 
 ```
 docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro -t aquasec/kube-bench:latest [master|node] --version 1.13
@@ -133,7 +133,7 @@ docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro -t aquasec/kube-bench:late
 > Note: the tests require either the kubelet or kubectl binary in the path in order to auto-detect the Kubernetes version. You can pass `-v $(which kubectl):/usr/bin/kubectl` to resolve this. You will also need to pass in kubeconfig credentials. For example:
 
 ```
-docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro -v $(which kubectl):/usr/bin/kubectl -v ~/.kube:/.kube -e KUBECONFIG=/.kube/config -t aquasec/kube-bench:latest [master|node] 
+docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro -v $(which kubectl):/usr/bin/kubectl -v ~/.kube:/.kube -e KUBECONFIG=/.kube/config -t aquasec/kube-bench:latest [master|node]
 ```
 
 You can use your own configs by mounting them over the default ones in `/opt/kube-bench/cfg/`
@@ -231,16 +231,16 @@ go build -o kube-bench .
 ./kube-bench
 ```
 
-## Running on OpenShift 
+## Running on OpenShift
 
 | OpenShift Hardening Guide | kube-bench config |
-|---|---|---|
-| ocp-3.10| rh-0.7 |
-| ocp-3.11| rh-0.7 |
+| --- | --- | --- |
+| ocp-3.10 | rh-0.7 |
+| ocp-3.11 | rh-0.7 |
 
 kube-bench includes a set of test files for Red Hat's OpenShift hardening guide for OCP 3.10 and 3.11. To run this you will need to specify `--benchmark rh-07`, or `--version ocp-3.10` or `--version ocp-3.11`
 
-when you run the `kube-bench` command (either directly or through YAML). 
+when you run the `kube-bench` command (either directly or through YAML).
 
 
 ## Output
@@ -270,7 +270,7 @@ The tests (or "controls") are represented as YAML documents (installed by defaul
 
 ### Omitting checks
 
-If you decide that a recommendation is not appropriate for your environment, you can choose to omit it by editing the test YAML file to give it the check type `skip` as in this example: 
+If you decide that a recommendation is not appropriate for your environment, you can choose to omit it by editing the test YAML file to give it the check type `skip` as in this example:
 
 ```yaml
   checks:
@@ -324,12 +324,12 @@ We also use the GitHub issue tracker to track feature requests. If you have an i
 - Clearly define the use case, using concrete examples. For example, I type `this` and kube-bench does `that`.
 - If you would like to include a technical design for your feature please feel free to do so.
 
-### Pull Requests 
+### Pull Requests
 
-We welcome pull requests! 
+We welcome pull requests!
 
 - Your PR is more likely to be accepted if it focuses on just one change.
-- Please include a comment with the results before and after your change. 
-- Your PR is more likely to be accepted if it includes tests. (We have not historically been very strict about tests, but we would like to improve this!). 
-- You're welcome to submit a draft PR if you would like early feedback on an idea or an approach. 
+- Please include a comment with the results before and after your change.
+- Your PR is more likely to be accepted if it includes tests. (We have not historically been very strict about tests, but we would like to improve this!).
+- You're welcome to submit a draft PR if you would like early feedback on an idea or an approach.
 - Happy coding!
