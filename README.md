@@ -109,6 +109,7 @@ kube-bench --benchmark cis-1.5 run --targets master,node,etcd,policies
 ```
 
 The following table shows the valid targets based on the CIS Benchmark version.
+
 | CIS Benchmark | Targets |
 | --- | --- |
 | cis-1.3 | master, node |
@@ -235,8 +236,8 @@ go build -o kube-bench .
 
 | OpenShift Hardening Guide | kube-bench config |
 | --- | --- | --- |
-| ocp\-3.10 | rh\-0.7 |
-| ocp\-3.11 | rh\-0.7 |
+| ocp-3.10 | rh-0.7 |
+| ocp-3.11 | rh-0.7 |
 
 kube-bench includes a set of test files for Red Hat's OpenShift hardening guide for OCP 3.10 and 3.11. To run this you will need to specify `--benchmark rh-07`, or `--version ocp-3.10` or `--version ocp-3.11`
 
