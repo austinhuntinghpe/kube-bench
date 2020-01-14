@@ -8,8 +8,12 @@ spec:
       hostPID: true
       containers:
       - name: kube-bench
-        # Push the image to your ECR and then refer to it here
-        image: <ID.dkr.ecr.region.amazonaws.com/aquasec/kube-bench:ref>
+        image: aquasec/kube-bench
+        resources:
+          limits:
+            memory: "200Mi"
+          requests:
+            memory: "100Mi"
         command: ["kube-bench", "--version", "1.11"]
         volumeMounts:
         - name: var-lib-kubelet
