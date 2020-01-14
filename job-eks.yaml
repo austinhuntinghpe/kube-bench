@@ -14,7 +14,7 @@ spec:
             memory: "200Mi"
           requests:
             memory: "100Mi"
-        command: ["kube-bench", "--version", "1.11"]
+        command: ["kube-bench", "--version", "1.15"]
         volumeMounts:
         - name: var-lib-kubelet
           mountPath: /var/lib/kubelet
